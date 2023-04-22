@@ -1,0 +1,35 @@
+home page:
+- slider 
+- navbar dropdowns
+
+Pricelist section:
+- see selection
+- see full pricelist / page
+
+review section;
+- see selection
+- see all reviews / page
+- your account has not proccessed order yet
+  so cannot leave a review
+
+sell phone section:
+- Category selection
+- Name of item
+- Condition selection
+- notes about condition
+
+
+
+[][][][][][][][]
+---Example 1---     [][][][][][][][]
+[---Example 2---]    ---Example 1---
+                    [---Example 2---]
+
+
+1
+
+5
+
+7
+        4
+        9
