@@ -1,3 +1,4 @@
+import AccountModel from './Components/AccountModel/AccountModel'
 import './globals.css'
 
 export const metadata = {
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='scroll-smooth'>{children}</body>
+      <body>
+        {children}
+        <AccountModel/>
+      </body>
     </html>
   )
 }

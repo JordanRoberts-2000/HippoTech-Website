@@ -94,11 +94,16 @@ const ReviewSection = () => {
                         <svg className='h-3 fill-teal-500' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
                         <svg className='h-3 fill-teal-500' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
                     </div>
-                    <p className=' text-gray-600 font-medium'>I sold my old phone recently and I couldn't be happier with the experience. From start to finish, everything was easy and straightforward. The website provided me with an instant quote for my phone based on its condition. The quote was fair and competitive compared to other companies I had researched.
+                    <p className=' text-gray-600 font-medium'>
+                        I sold my old phone recently and I couldn&apos;t be happier with the experience. From start to finish, everything was easy and straightforward. 
+                        The website provided me with an instant quote for my phone based on its condition. The quote was fair and competitive compared to other companies 
+                        I had researched.
 
-Once I accepted the quote, I received a free shipping label to send my phone in. The company provided updates throughout the process, letting me know when they received my phone and when payment was being processed. Payment was quick and hassle-free.
+                        Once I accepted the quote, I received a free shipping label to send my phone in. The company provided updates throughout the process,
+                        letting me know when they received my phone and when payment was being processed. Payment was quick and hassle-free.
 
-Overall, I was extremely impressed with this company's professionalism, efficiency, and customer service. I would highly recommend them to anyone looking to sell their old phone. Thank you for a great experience!</p>
+                        Overall, I was extremely impressed with this company&apos;s professionalism, efficiency, and customer service. I would highly recommend them to
+                        anyone looking to sell their old phone. Thank you for a great experience!</p>
                 </div>
                 <div className='pl-4 pr-12'>
                 <div className='flex items-end'>
@@ -121,7 +126,7 @@ Once I accepted the offer, shipping my cameras to the company was a breeze. They
 
 When the cameras arrived, the team at the company wasted no time in evaluating them and making me an offer. The price they offered was fair and competitive, and the payment was processed quickly and securely.
 
-Overall, I can't recommend this company highly enough. If you're looking to sell old cameras, this is the place to go. They provide exceptional service, fair prices, and a smooth, hassle-free transaction. Five stars all the way!</p>
+Overall, I can&apos;t recommend this company highly enough. If you&apos;re looking to sell old cameras, this is the place to go. They provide exceptional service, fair prices, and a smooth, hassle-free transaction. Five stars all the way!</p>
                 </div>
             </div>
         </div>
