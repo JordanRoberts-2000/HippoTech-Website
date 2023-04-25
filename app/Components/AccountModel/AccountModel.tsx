@@ -3,10 +3,14 @@
 import RisingFallingModel from './RisingFallingModel'
 import { useStore } from '@/Zustand/store'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
-import NameInput from './Inputs/NameInput'
+import { useRef } from 'react'
+import TextInput from './Inputs/TextInput'
+import { emailValidation, passwordValidation, usernameValidation } from '@/utils/validation/clientsideValidation'
 
 const AccountModel = () => {
+    let usernameValue = useRef<HTMLInputElement>(null)
+    let emailValue = useRef<HTMLInputElement>(null)
+    let passwordValue = useRef<HTMLInputElement>(null)
     const { accountModelActive } = useStore()
     let fadedBackgroundRef = useRef<HTMLDivElement>(null)
     const cancelFunction = (e: any) => {
@@ -35,24 +39,13 @@ const AccountModel = () => {
                         </div>
                     </div>
                     <form className='flex flex-col mt-4'>
-                        <NameInput/>
-                        <div className='w-[80%] mx-auto flex flex-col mt-4'>
-                            <label className='font-medium text-gray-700'>Email:</label>
-                            <input type="email" className='bg-gray-100 border-gray-300 border rounded-sm p-1'/>
-                        </div>
-                        <div className='w-[80%] mx-auto flex flex-col mt-4'>
-                            <div className='flex'>
-                                <label className='font-medium text-gray-700'>Password:</label>
-                                <div className='mt-auto mb-1 mr-1 ml-auto relative cursor-pointer group'>
-                                    <span className='absolute top-[50%] opacity-0 duration-150 group-hover:opacity-[1] pointer-events-none tooltip translate-y-[-50%] left-[100%] 
-                                          whitespace-nowrap z-20 bg-gray-200 border-gray-400 border text-xs font-medium text-gray-600 p-2 ml-2 rounded-md'>
-                                          Password must have a minimum of 6<br/> characters and a maximum of 16 characters
-                                    </span>
-                                    <svg className='h-3 fill-teal-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
-                                </div>
-                            </div>
-                            <input type="password" className='bg-gray-100 border-gray-300 border rounded-sm p-1'/>
-                        </div>
+                        {/* <NameInput usernameValue={usernameValue}/> */}
+                        <TextInput refValue={usernameValue} validationFunc={usernameValidation} title={'Username:'} maxLength={16} tooltip={true} debounceDuration={100}
+                                   tooltipMessage='Username must have a minimum of 6 letters' password={false}/>
+                        <TextInput refValue={emailValue} validationFunc={emailValidation} title={'Email:'} maxLength={40} tooltip={false} debounceDuration={400} password={false}/>
+                        <TextInput refValue={passwordValue} validationFunc={passwordValidation} title={'Password:'} maxLength={16} tooltip={true} debounceDuration={400}
+                                   tooltipMessage='Password must have a minimum of 8 letters and must contain atlest one capital letter, one number on one special value eg: $&+,:;=?@#|<>.^*()%!-' 
+                                   password={true}/>
                         <div className="checkbox-wrapper-4 w-[80%] mx-auto mt-4">
                             <input className="inp-cbx" id="terms" type="checkbox"/>
                             <label className="cbx" htmlFor="terms">

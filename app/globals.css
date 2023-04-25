@@ -105,3 +105,8 @@
       transform: scale(0.9);
     }
   }
+
+.tickSvg{
+  stroke-dasharray: 25;
+  stroke-dashoffset: '0%';
+}
