@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion"
-import { useCallback, useRef, useState } from "react"
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react"
 
 const varients = {
     errorActive1: { width: ['0rem', '1rem', '1rem', '1rem'], rotate: [0, 0, 0, 45], y: [2], transition: {duration: .6, times: [0, .3]}},
@@ -25,10 +25,12 @@ type Props = {
     debounceDuration: number
     tooltip: boolean,
     tooltipMessage?: string,
-    password: boolean
+    password: boolean,
+    submitEmpty: boolean,
+    emtpySetter: Dispatch<SetStateAction<boolean>>
 }
 
-const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration, tooltip, tooltipMessage, password}:Props) => {
+const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration, tooltip, tooltipMessage, password, submitEmpty, emtpySetter}:Props) => {
     let errorAnimating = useRef(false)
     const [textErrorMessage, setTextErrorMessage] = useState('')
     const [textInputError, setTextInputError] = useState(false)
@@ -44,15 +46,19 @@ const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration
         }
     }
 
-    const onChangeFunction = (name:string) => {
-        if(textInputError){
-            setTextInputError(false)
+    const resetError = (errorVal:boolean, setter:Dispatch<SetStateAction<boolean>>) => {
+        if(errorVal){
+            setter(false)
             setTextErrorMessage('')
             errorAnimating.current = true
             setTimeout(() => {
                 errorAnimating.current = false
             },600)
         }
+    }
+    const onChangeFunction = (name:string) => {
+        resetError(submitEmpty, emtpySetter)
+        resetError(textInputError, setTextInputError)
         const result = validationFunc(name)
         if(result.valid){
             if(!textValid){
@@ -69,7 +75,7 @@ const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration
         }
     }
 
-    let textOnchangeDebounce = useCallback(debounce((name: string) => onChangeFunction(name), debounceDuration), [textErrorMessage, textInputError, textValid])
+    let textOnchangeDebounce = useCallback(debounce((name: string) => onChangeFunction(name), debounceDuration), [textErrorMessage, textInputError, textValid, submitEmpty])
 
     const textUnfocus = (name: string) => {
         if(textInputError || name.length === 0)return
@@ -82,9 +88,11 @@ const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration
     return (
         <div className='w-[80%] mx-auto flex flex-col'>
             <div className='flex'>
-                <label className='font-medium text-gray-700'>{title}:</label>
+                <label htmlFor={title} className='font-medium text-gray-700'>{title}</label>
                 <div className='mt-auto mr-1 ml-auto relative flex cursor-pointer group'>
-                    <span className={`${textInputError ? 'opacity-1' : 'opacity-0'} duration-200 ml-auto text-xs mt-auto mb-[3px] mr-2 text-red-500`}>{textErrorMessage}</span>
+                    <span className={`${(textInputError || submitEmpty) ? 'opacity-1' : 'opacity-0'} duration-200 ml-auto font-semibold text-xs mt-auto mb-[3px] mr-2 text-red-500`}>
+                        {submitEmpty ? 'Field empty' : textErrorMessage}
+                    </span>
                     {tooltip && 
                     <>
                         <span className='absolute top-[50%] opacity-0 duration-150 group-hover:opacity-[1] pointer-events-none translate-y-[-50%] left-[100%] 
@@ -96,12 +104,11 @@ const TextInput = ({refValue, validationFunc, title, maxLength, debounceDuration
                 </div>
             </div>
             <div className='flex relative'>
-                <input ref={refValue} type={password ? 'password' : 'text'} className={`bg-gray-100 ${textInputError && 'border-b-red-500'} border-gray-300 border rounded-sm p-1 flex-1 pr-8`} 
+                <input ref={refValue} id={title} type={password ? 'password' : 'text'} className={`bg-gray-100 ${(textInputError || submitEmpty) && 'border-b-red-500'} border-gray-300 taxt-sm font-medium text-gray-600 border rounded-sm p-1 pl-2 flex-1 pr-8`} 
                        maxLength={maxLength} onChange={(e) => textOnchangeDebounce(e.target.value)} onBlur={(e) => textUnfocus(e.target.value)}/>
                 <div className='absolute top-[50%] translate-y-[-50%] right-0 flex flex-col w-4 h-4 mr-2 justify-center items-center overflow-hidden'>
-                    <motion.div variants={varients} animate={textInputError ? 'errorActive1' : 'inActive1'} className={`h-[2px] bg-red-500`}></motion.div>
-                    <motion.div variants={varients} animate={textInputError ? 'errorActive2' : 'inActive2'} className={`h-[2px] bg-red-500`}></motion.div>
-                    
+                    <motion.div variants={varients} animate={(textInputError || submitEmpty) ? 'errorActive1' : 'inActive1'} className={`h-[2px] bg-red-500`}></motion.div>
+                    <motion.div variants={varients} animate={(textInputError || submitEmpty) ? 'errorActive2' : 'inActive2'} className={`h-[2px] bg-red-500`}></motion.div>
                         <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                             <svg className="w-5 h-5 stroke-teal-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2}>
                                 <motion.path variants={varients} animate={textValid ? 'valid' : 'Notvalid'} strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
