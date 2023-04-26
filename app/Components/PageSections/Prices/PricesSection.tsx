@@ -1,5 +1,4 @@
-import React from 'react'
-import PriceOption from './PriceOption'
+import PriceOption from './Components/PriceOption'
 
 const PricesSection = () => {
   return (

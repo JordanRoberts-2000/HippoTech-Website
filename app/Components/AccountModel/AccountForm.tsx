@@ -3,6 +3,7 @@
 import Steps from './Inputs/Steps'
 import { FormEvent, useRef, useState } from 'react'
 import UserPage from './FormPages/UserPage'
+import DeliveryPage from './FormPages/DeliveryPage'
 
 const AccountForm = () => {
     let steps = useRef(['User', 'Delivery'])
@@ -21,12 +22,11 @@ const AccountForm = () => {
                 <Steps titles={steps.current} currentIndex={currentStepIndex}/>
             </div>
             <form className='flex flex-col mt-4' onSubmit={(e) => handleSubmit(e)}>
-                { currentStepIndex === 0 ? 
+                { currentStepIndex === 0 &&
                    <UserPage usernameRef={usernameValue} emailRef={emailValue} passwordRef={passwordValue} checkBoxRef={termsAndConditionsValue} indexSetter={setCurrentStepIndex}/>
-                :
-                    <>
-                    
-                    </>
+                }
+                { currentStepIndex === 1 &&
+                   <DeliveryPage/>
                 }
             </form>
         </>

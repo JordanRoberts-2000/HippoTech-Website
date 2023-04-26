@@ -65,3 +65,51 @@
       transform: scale(0.9);
     }
   }
+
+
+@keyframes spinning {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes colorChanger {
+  100%,0%{
+    stroke: green;
+  }
+  25%{
+    stroke: red;
+  }
+  50%{
+    stroke: orange;
+  }
+  75%{
+    stroke: yellow;
+  }
+}
+
+@keyframes dash {
+  0%{
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50%{
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100%{
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+
+.loadingSvg{
+  animation: spinning 1.5s linear infinite;
+}
+
+.loadingCircle{
+  animation: colorChanger 6s ease-in-out infinite, dash 1.5s ease-in-out infinite;
+}
